@@ -1,0 +1,86 @@
+
+.ribbonbox {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.ribbon {
+    position: absolute;
+    right: -5px; top: -5px;
+    z-index: 1;
+    overflow: hidden;
+    width: 105px;
+    height: 105px;
+    text-align: right;
+}
+.ribbon span {
+    font-size: 10px;
+    font-weight: bold;
+    color: #FFF;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 20px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    width: 140px;
+    display: block;
+    background: #79A70A;
+    background: linear-gradient(#9BC90D 0%, #79A70A 100%);
+    box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
+    position: absolute;
+    top: 33px;
+    right: -27px;
+}
+.ribbon.development span {
+    background: #79A70A;
+    background: linear-gradient(#9BC90D 0%, #79A70A 100%);
+}
+.ribbon.testing span {
+    background: #8F5408;
+    background: linear-gradient(#F79E05 0%, #8F5408 100%);
+}
+.ribbon.production span {
+    background: #8F0808;
+    background: linear-gradient(#F70505 0%, #8F0808 100%);
+}
+
+.ribbon span::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 100%;
+    z-index: -1;
+    border-left: 3px solid #79A70A;
+    border-right: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+    border-top: 3px solid #79A70A;
+}
+.ribbon.testing span::before {
+    border-left: 3px solid #8F5408;
+    border-top: 3px solid #8F5408;
+}
+.ribbon.production span::before {
+    border-left: 3px solid #8F0808;
+    border-top: 3px solid #8F0808;
+}
+.ribbon span::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 100%;
+    z-index: -1;
+    border-left: 3px solid transparent;
+    border-right: 3px solid #79A70A;
+    border-bottom: 3px solid transparent;
+    border-top: 3px solid #79A70A;
+}
+.ribbon.testing span::after {
+    border-right: 3px solid #8F5408;
+    border-top: 3px solid #8F5408;
+}
+.ribbon.production span::after {
+    border-right: 3px solid #8F0808;
+    border-top: 3px solid #8F0808;
+}

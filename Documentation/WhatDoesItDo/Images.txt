@@ -1,0 +1,20 @@
+﻿.. |img-1|      image:: ../Images/development.png
+   :height: 150
+   :width: 150
+.. :align: left
+.. :border: 0
+.. :name: Grafik1
+
+.. |img-2|      image:: ../Images/testing.png
+   :height: 150
+   :width: 150
+.. :align: left
+.. :border: 0
+.. :name: Grafik1
+
+.. |img-3|      image:: ../Images/production.png
+   :height: 150
+   :width: 150
+.. :align: left
+.. :border: 0
+.. :name: Grafik1
