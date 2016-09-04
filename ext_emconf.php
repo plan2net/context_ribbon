@@ -2,7 +2,7 @@
 
 $EM_CONF[$_EXTKEY] = array(
 	'title' => 'Context Ribbon',
-	'description' => 'Shows a ribbon in the right top corner depending on the TYPO3 application context',
+	'description' => 'Shows a ribbon in the right top corner of the backend depending on the TYPO3 application context',
 	'author' => 'Sven Wappler',
 	'author_email' => 'typo3YYYY@wapplersystems.de',
 	'category' => 'backend',
