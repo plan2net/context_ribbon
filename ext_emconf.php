@@ -2,7 +2,7 @@
 
 $EM_CONF[$_EXTKEY] = array(
 	'title' => 'Context Ribbon',
-	'description' => 'Shows a ribbon in the right top corner of the backend depending on the TYPO3 application context',
+	'description' => 'Shows a ribbon in the right top corner of the backend and frontend depending on the TYPO3 application context',
 	'author' => 'Sven Wappler',
 	'author_email' => 'typo3YYYY@wapplersystems.de',
 	'category' => 'backend',
@@ -18,7 +18,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'modify_tables' => '',
 	'clearCacheOnLoad' => 1,
 	'lockType' => '',
-	'version' => '1.0.1',
+	'version' => '1.0.2',
 	'constraints' => array(
 		'depends' => array(
 			'typo3' => '6.2.0-7.9.99',
