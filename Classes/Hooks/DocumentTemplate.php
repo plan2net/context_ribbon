@@ -4,21 +4,30 @@ namespace WapplerSystems\ContextRibbon\Hooks;
 
 
 use TYPO3\CMS\Core\Page\PageRenderer;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
 class DocumentTemplate {
 
 	/**
 	 *
 	 * @param array $hookParameters
-	 * @param $documentTemplateInstance
+	 * @param \TYPO3\CMS\Backend\Template\DocumentTemplate $documentTemplateInstance
 	 */
 	public function preHeaderRenderHook($hookParameters, $documentTemplateInstance) {
 
+        if (!\TYPO3\CMS\Core\Utility\GeneralUtility::compat_version('7.6')) {
+
+            if ($documentTemplateInstance->bodyTagId != "typo3-backend-php") {
+                return;
+            }
+        }
+
         /** @var PageRenderer $pageRenderer */
 	    $pageRenderer = $hookParameters['pageRenderer'];
-        $pageRenderer->addCssFile('../typo3conf/ext/context_ribbon/Resources/Public/CSS/ribbon.css');
-        $pageRenderer->addJsFile('../typo3conf/ext/context_ribbon/Resources/Public/JavaScript/ribbon.js');
+        $pageRenderer->addCssFile(ExtensionManagementUtility::extRelPath('context_ribbon') .'/Resources/Public/CSS/ribbon.css');
+        $pageRenderer->addJsFile(ExtensionManagementUtility::extRelPath('context_ribbon') . '/Resources/Public/JavaScript/ribbon.js');
 
         $strContext = "";
         $context = GeneralUtility::getApplicationContext();
