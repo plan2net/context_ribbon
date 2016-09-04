@@ -22,6 +22,7 @@ Restart your server and the ribbon is shown. The states development, testing and
 
 You can switch off/on the ribbon in the frontend by extension settings in extension manager.
 
+*It doesn't show a ribbon while production mode in frontend!*
 
 Credits
 -------
