@@ -22,7 +22,7 @@ class Frontend {
         $pageRenderer = $pObj->getPageRenderer();
 
 
-        $strContext = "";
+        $strContext = "production";
         $context = GeneralUtility::getApplicationContext();
         $parentContext = $context->getParent();
 
@@ -35,7 +35,7 @@ class Frontend {
 
         $pageRenderer->addHeaderData('<meta name="context" value="'.$strContext.'" />');
 
-        if ($context->isTesting() || $context->isDevelopment()) {
+        if ($strContext != "production") {
             $pageRenderer->addCssFile(ExtensionManagementUtility::extRelPath('context_ribbon') . '/Resources/Public/CSS/ribbon.css');
             $pageRenderer->addJsFile(ExtensionManagementUtility::extRelPath('context_ribbon') . '/Resources/Public/JavaScript/ribbon.js');
         }
