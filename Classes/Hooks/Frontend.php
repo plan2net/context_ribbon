@@ -29,7 +29,7 @@ class Frontend {
         if ($context->isDevelopment()) $strContext = "development";
         if ($context->isTesting()) $strContext = "testing";
         if ($context->isProduction()) $strContext = "production";
-        if (isset($parentContext) && $parentContext->__toString() == "Production/Staging") {
+        if (isset($parentContext) && ($parentContext->__toString() == "Production/Staging" || $parentContext->__toString() == "Development/Staging")) {
             $strContext = "staging";
         }
 

@@ -23,6 +23,7 @@ The extension shows a ribbon in the right top corner of the frontend and backend
 It supports the following states:
 
 * Development
+* Development/Staging
 * Testing
 * Production/Staging
 * Production
