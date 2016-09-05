@@ -20,7 +20,14 @@ What does it do?
 
 The extension shows a ribbon in the right top corner of the frontend and backend.
 
-|img-1| |img-2| |img-3|
+It supports the following states:
+
+* Development
+* Testing
+* Production/Staging
+* Production
+
+|img-1| |img-2| |img-3| |img-4|
 
 
 

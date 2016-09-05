@@ -31,9 +31,14 @@ class DocumentTemplate {
 
         $strContext = "";
         $context = GeneralUtility::getApplicationContext();
+        $parentContext = $context->getParent();
+
         if ($context->isDevelopment()) $strContext = "development";
         if ($context->isTesting()) $strContext = "testing";
         if ($context->isProduction()) $strContext = "production";
+        if (isset($parentContext) && $parentContext->__toString() == "Production/Staging") {
+            $strContext = "staging";
+        }
 
         $pageRenderer->addHeaderData('<meta name="context" value="'.$strContext.'" />');
 

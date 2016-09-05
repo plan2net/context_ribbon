@@ -12,7 +12,14 @@
 .. :border: 0
 .. :name: Grafik1
 
-.. |img-3|      image:: ../Images/production.png
+.. |img-3|      image:: ../Images/staging.png
+   :height: 150
+   :width: 150
+.. :align: left
+.. :border: 0
+.. :name: Grafik1
+
+.. |img-4|      image:: ../Images/production.png
    :height: 150
    :width: 150
 .. :align: left
