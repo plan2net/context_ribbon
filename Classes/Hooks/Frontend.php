@@ -35,10 +35,6 @@ class Frontend {
 
         $pageRenderer->addHeaderData('<meta name="context" value="'.$strContext.'" />');
 
-        if ($strContext != "production") {
-            $pageRenderer->addCssFile(ExtensionManagementUtility::extRelPath('context_ribbon') . '/Resources/Public/CSS/ribbon.css');
-            $pageRenderer->addJsFile(ExtensionManagementUtility::extRelPath('context_ribbon') . '/Resources/Public/JavaScript/ribbon.js');
-        }
 
     }
 

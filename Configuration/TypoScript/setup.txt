@@ -1,0 +1,12 @@
+
+[applicationContext = Production]
+[else]
+page.includeCSS {
+    context_ribbon = EXT:context_ribbon/Resources/Public/CSS/ribbon.css
+}
+
+page.includeJSFooter {
+    context_ribbon = EXT:context_ribbon/Resources/Public/JavaScript/ribbon.js
+}
+
+[end]

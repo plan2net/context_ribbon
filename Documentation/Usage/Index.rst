@@ -18,11 +18,12 @@ Usage
 
 Install the extension and set the application context: https://docs.typo3.org/typo3cms/extensions/bsdist/Main/ApplicationContext/Index.html
 
-Restart your server and the ribbon is shown. The states development, testing and production are supported.
+Restart your webserver server and the ribbon is shown.
 
-You can switch off/on the ribbon in the frontend by extension settings in extension manager.
+You can switch off/on the ribbon in the frontend by adding the static extension template to you main template.
 
-*It doesn't show a ribbon while production mode in frontend!*
+*The ribbon is hidden in production context automatically!*
+
 
 Credits
 -------
