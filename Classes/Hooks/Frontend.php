@@ -1,41 +1,18 @@
 <?php
 namespace WapplerSystems\ContextRibbon\Hooks;
 
-
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
+use WapplerSystems\ContextRibbon\Helper\ContextHelper;
 
 class Frontend {
 
     /**
      *
      * @param array $params
-     * @param \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController $pObj
+     * @param TypoScriptFrontendController $pObj
      */
     public function frontendHook($params, $pObj) {
-
-        $config = $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['context_ribbon'];
-        $config = $config ? unserialize($config) : array();
-
-        if ($config['frontend'] == false) return;
-
-        $pageRenderer = $pObj->getPageRenderer();
-
-
-        $strContext = "production";
-        $context = GeneralUtility::getApplicationContext();
-        $parentContext = $context->getParent();
-
-        if ($context->isDevelopment()) $strContext = "development";
-        if ($context->isTesting()) $strContext = "testing";
-        if ($context->isProduction()) $strContext = "production";
-        if (isset($parentContext) && ($parentContext->__toString() == "Production/Staging" || $parentContext->__toString() == "Development/Staging")) {
-            $strContext = "staging";
-        }
-
-        $pageRenderer->addHeaderData('<meta name="context" value="'.$strContext.'" />');
-
-
+        ContextHelper::addMetaTag();
     }
 
 }

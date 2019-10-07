@@ -1,12 +1,11 @@
 <?php
 namespace WapplerSystems\ContextRibbon\Hooks;
 
-
-
 use TYPO3\CMS\Core\Page\PageRenderer;
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\PathUtility;
 use TYPO3\CMS\Core\Utility\VersionNumberUtility;
+use WapplerSystems\ContextRibbon\Helper\ContextHelper;
 
 class DocumentTemplate {
 
@@ -16,32 +15,31 @@ class DocumentTemplate {
 	 * @param \TYPO3\CMS\Backend\Template\DocumentTemplate $documentTemplateInstance
 	 */
 	public function preHeaderRenderHook($hookParameters, $documentTemplateInstance) {
-
-        if (!\TYPO3\CMS\Core\Utility\GeneralUtility::compat_version('7.6')) {
-
-            if ($documentTemplateInstance->bodyTagId != "typo3-backend-php") {
-                return;
-            }
+	    
+        if ((VersionNumberUtility::convertVersionNumberToInteger(TYPO3_branch) < VersionNumberUtility::convertVersionNumberToInteger('7.6')) && $documentTemplateInstance->bodyTagId !== "typo3-backend-php") {
+            return;
         }
 
         /** @var PageRenderer $pageRenderer */
-	    $pageRenderer = $hookParameters['pageRenderer'];
-        $pageRenderer->addCssFile(ExtensionManagementUtility::extRelPath('context_ribbon') .'/Resources/Public/CSS/ribbon.css');
-        $pageRenderer->addJsFile(ExtensionManagementUtility::extRelPath('context_ribbon') . '/Resources/Public/JavaScript/ribbon.js');
+        $pageRenderer = $hookParameters['pageRenderer'];
 
-        $strContext = "";
-        $context = GeneralUtility::getApplicationContext();
-        $parentContext = $context->getParent();
+        $pageRenderer->addCssFile(
+            PathUtility::getAbsoluteWebPath(
+                GeneralUtility::getFileAbsFileName(
+                    'EXT:context_ribbon/Resources/Public/CSS/ribbon.css'
+                )
+            )
+        );
 
-        if ($context->isDevelopment()) $strContext = "development";
-        if ($context->isTesting()) $strContext = "testing";
-        if ($context->isProduction()) $strContext = "production";
-        if (isset($parentContext) && ($parentContext->__toString() == "Production/Staging" || $parentContext->__toString() == "Development/Staging")) {
-            $strContext = "staging";
-        }
+        $pageRenderer->addJsFile(
+            PathUtility::getAbsoluteWebPath(
+                GeneralUtility::getFileAbsFileName(
+                    'EXT:context_ribbon/Resources/Public/JavaScript/ribbon.js'
+                )
+            )
+        );
 
-        $pageRenderer->addHeaderData('<meta name="context" value="'.$strContext.'" />');
-
+        ContextHelper::addMetaTag();
 	}
 
 }

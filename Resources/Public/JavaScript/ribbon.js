@@ -12,7 +12,7 @@ function getContextName() {
     var metas = document.getElementsByTagName('meta');
 
     for (var i=0; i<metas.length; i++) {
-        if (metas[i].getAttribute("name") == "context") {
+        if (metas[i].getAttribute("name") === "context") {
             return metas[i].getAttribute("value");
         }
     }
@@ -21,11 +21,11 @@ function getContextName() {
 }
 
 document.onreadystatechange = function () {
-    if (document.readyState == "complete") {
+    if (document.readyState === "complete") {
 
         var value = getContextName();
-        if (value == null || value == "") value = "Production";
-
-        ribbonAppendHtml(document.body, '<div class="ribbonbox"><div class="ribbon ' + value.toLowerCase() + '"><span>' + value + '</span></div></div>');
+        if (value) {
+            ribbonAppendHtml(document.body, '<div class="ribbonbox"><div class="ribbon ' + value.toLowerCase() + '"><span>' + value + '</span></div></div>');
+        }
     }
 };
