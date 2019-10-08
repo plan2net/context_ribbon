@@ -22,6 +22,7 @@ Install the extension and set the application context: https://docs.typo3.org/ty
 
 Restart your webserver server and the ribbon is shown.
 
-You can switch off/on the ribbon in the frontend by adding the static extension template to your main template.
+You can switch off/on the ribbon in the frontend/backend by changing the extension settings:
+![extension configuration](Documentation/Images/extension_configuration.png)
 
-The ribbon is hidden in production context automatically!
+The ribbon is hidden in frontend in production context automatically!

@@ -1,0 +1,4 @@
+# cat=global; type=boolean; label=LLL:EXT:context_ribbon/Resources/Private/Language/locallang_be.xlf:extension.enable.backend
+enableBackend = 1
+# cat=global; type=boolean; label=LLL:EXT:context_ribbon/Resources/Private/Language/locallang_be.xlf:extension.enable.frontend
+enableFrontend = 1
