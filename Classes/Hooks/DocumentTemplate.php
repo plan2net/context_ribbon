@@ -27,8 +27,7 @@ class DocumentTemplate
         }
 
         if (isset($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['context_ribbon'])) {
-            $configuration = (array)unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['context_ribbon'],
-                [false]);
+            $configuration = (array)unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['context_ribbon']);
 
             if (isset($configuration['enableBackend']) && (bool)$configuration['enableBackend']) {
                 ContextHelper::addMetaTag();

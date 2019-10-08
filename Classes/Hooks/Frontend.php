@@ -23,8 +23,7 @@ class Frontend
     public function frontendHook($params, $pObj)
     {
         if (isset($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['context_ribbon'])) {
-            $configuration = (array)unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['context_ribbon'],
-                [false]);
+            $configuration = (array)unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['context_ribbon']);
 
             if (isset($configuration['enableFrontend']) && (bool)$configuration['enableFrontend']) {
                 ContextHelper::addMetaTag();
