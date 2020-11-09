@@ -6,7 +6,6 @@ namespace WapplerSystems\ContextRibbon\Helper;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Core\ApplicationContext;
 use TYPO3\CMS\Core\Page\PageRenderer;
-use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
 
@@ -17,17 +16,25 @@ use TYPO3\CMS\Core\Utility\PathUtility;
  * @author Sven Wappler
  * @author Ioulia Kondratovitch <ik@plan2.net>
  */
-class ContextHelper implements SingletonInterface
+class ContextHelper
 {
+
+    /**
+     * @var PageRenderer
+     */
+    protected $pageRenderer;
+
+    public function __construct()
+    {
+        $this->pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
+    }
+
     /**
      * Provide HTML with an information about TYPO3_CONTEXT:
      * add a meta tag to the header data.
      */
     public function addMetaTag(): void
     {
-        /** @var PageRenderer $pageRenderer */
-        $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
-
         $strContext = '';
         /** @var ApplicationContext $context */
         $context = Environment::getContext();
@@ -42,7 +49,7 @@ class ContextHelper implements SingletonInterface
             $strContext = 'production';
         }
 
-        $pageRenderer->addHeaderData('<meta name="context" content="' . $strContext . '" />');
+        $this->pageRenderer->addHeaderData('<meta name="context" content="' . $strContext . '" />');
     }
 
     /**
@@ -50,10 +57,7 @@ class ContextHelper implements SingletonInterface
      */
     public function addCssJsFiles(): void
     {
-        /** @var PageRenderer $pageRenderer */
-        $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
-
-        $pageRenderer->addCssFile(
+        $this->pageRenderer->addCssFile(
             PathUtility::getAbsoluteWebPath(
                 GeneralUtility::getFileAbsFileName(
                     'EXT:context_ribbon/Resources/Public/CSS/ribbon.css'
@@ -61,7 +65,7 @@ class ContextHelper implements SingletonInterface
             )
         );
 
-        $pageRenderer->addJsFile(
+        $this->pageRenderer->addJsFile(
             PathUtility::getAbsoluteWebPath(
                 GeneralUtility::getFileAbsFileName(
                     'EXT:context_ribbon/Resources/Public/JavaScript/ribbon.js'

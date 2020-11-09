@@ -43,8 +43,9 @@ class Ribbon implements LoggerAwareInterface
             $this->logger->error($extensionConfigurationPathDoesNotExistException->getMessage());
         }
         if ($configurationEntry) {
-            ContextHelper::addMetaTag();
-            ContextHelper::addCssJsFiles();
+            $contextHelper = GeneralUtility::makeInstance(ContextHelper::class);
+            $contextHelper->addMetaTag();
+            $contextHelper->addCssJsFiles();
         }
     }
 
