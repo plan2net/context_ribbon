@@ -41,7 +41,7 @@ class ContextHelper
             $strContext = 'production';
         }
 
-        $pageRenderer->addHeaderData('<meta name="context" value="' . $strContext . '" />');
+        $pageRenderer->addHeaderData('<meta name="context" content="' . $strContext . '" />');
     }
 
     /**

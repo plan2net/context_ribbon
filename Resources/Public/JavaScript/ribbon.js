@@ -11,7 +11,7 @@ function getContextName () {
 
     for (var i = 0; i < metas.length; i++) {
         if (metas[i].getAttribute('name') === 'context') {
-            return metas[i].getAttribute('value');
+            return metas[i].getAttribute('content');
         }
     }
 
