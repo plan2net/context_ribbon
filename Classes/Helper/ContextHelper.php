@@ -6,6 +6,7 @@ namespace WapplerSystems\ContextRibbon\Helper;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Core\ApplicationContext;
 use TYPO3\CMS\Core\Page\PageRenderer;
+use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
 
@@ -16,13 +17,13 @@ use TYPO3\CMS\Core\Utility\PathUtility;
  * @author Sven Wappler
  * @author Ioulia Kondratovitch <ik@plan2.net>
  */
-class ContextHelper
+class ContextHelper implements SingletonInterface
 {
     /**
      * Provide HTML with an information about TYPO3_CONTEXT:
      * add a meta tag to the header data.
      */
-    public static function addMetaTag(): void
+    public function addMetaTag(): void
     {
         /** @var PageRenderer $pageRenderer */
         $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
@@ -47,7 +48,7 @@ class ContextHelper
     /**
      * Add CSS and JS files
      */
-    public static function addCssJsFiles(): void
+    public function addCssJsFiles(): void
     {
         /** @var PageRenderer $pageRenderer */
         $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
