@@ -1,11 +1,8 @@
 <?php
-if (!defined('TYPO3_MODE')) {
-    die('Access denied.');
-}
 
+defined('TYPO3_MODE') or die('Access denied.');
 
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['typo3/template.php']['preHeaderRenderHook']['WaplerSystems\\ContextRibbon\\Hooks\\DocumentTemplate'] =
-    'WapplerSystems\\ContextRibbon\\Hooks\\DocumentTemplate->preHeaderRenderHook';
-
-
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_fe.php']['configArrayPostProc']['WaplerSystems\\ContextRibbon\\Hooks\\Frontend'] = 'WapplerSystems\\ContextRibbon\\Hooks\\Frontend->frontendHook';
+(static function () {
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['typo3/backend.php']['renderPreProcess'][\WapplerSystems\ContextRibbon\Hooks\Ribbon::class] = \WapplerSystems\ContextRibbon\Hooks\Ribbon::class . '->setRibbonForBackend';
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_fe.php']['configArrayPostProc'][\WapplerSystems\ContextRibbon\Hooks\Ribbon::class] = \WapplerSystems\ContextRibbon\Hooks\Ribbon::class . '->setRibbonForFrontend';
+})();

@@ -8,9 +8,8 @@
   "keywords": [
     "TYPO3 CMS"
   ],
-  "version": "2.1.0",
   "require": {
-    "typo3/cms-core": "^6.2 || ^7.6 || ^8.7 || ^9.5"
+    "typo3/cms-core": "^10.4"
   },
   "autoload": {
     "psr-4": {
