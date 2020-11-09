@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff version="1.0">
-    <file source-language="en" datatype="plaintext" original="messages" date="2019-10-08T10:57:32Z" product-name="context_ribbon">
+    <file source-language="en"
+          datatype="plaintext"
+          original="messages"
+          date="2019-10-08T10:57:32Z"
+          product-name="context_ribbon">
         <header/>
         <body>
             <trans-unit id="extension.enable.backend">

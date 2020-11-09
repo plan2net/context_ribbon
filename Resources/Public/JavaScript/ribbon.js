@@ -1,6 +1,4 @@
-
-
-function ribbonAppendHtml(el, str) {
+function ribbonAppendHtml (el, str) {
     var div = document.createElement('div');
     div.innerHTML = str;
     while (div.children.length > 0) {
@@ -8,20 +6,20 @@ function ribbonAppendHtml(el, str) {
     }
 }
 
-function getContextName() {
+function getContextName () {
     var metas = document.getElementsByTagName('meta');
 
-    for (var i=0; i<metas.length; i++) {
-        if (metas[i].getAttribute("name") === "context") {
-            return metas[i].getAttribute("value");
+    for (var i = 0; i < metas.length; i++) {
+        if (metas[i].getAttribute('name') === 'context') {
+            return metas[i].getAttribute('value');
         }
     }
 
-    return "";
+    return '';
 }
 
 document.onreadystatechange = function () {
-    if (document.readyState === "complete") {
+    if (document.readyState === 'complete') {
 
         var value = getContextName();
         if (value) {

@@ -1,7 +1,9 @@
 <?php
+declare(strict_types=1);
 
 namespace WapplerSystems\ContextRibbon\Helper;
 
+use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Core\ApplicationContext;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -12,7 +14,7 @@ use TYPO3\CMS\Core\Utility\PathUtility;
  *
  * @package WapplerSystems\ContextRibbon\Helper
  * @author Sven Wappler
- * @author  Ioulia Kondratovitch <ik@plan2.net>
+ * @author Ioulia Kondratovitch <ik@plan2.net>
  */
 class ContextHelper
 {
@@ -20,15 +22,14 @@ class ContextHelper
      * Provide HTML with an information about TYPO3_CONTEXT:
      * add a meta tag to the header data.
      */
-    public static function addMetaTag()
+    public static function addMetaTag(): void
     {
-
         /** @var PageRenderer $pageRenderer */
-        $pageRenderer = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Page\\PageRenderer');
+        $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
 
         $strContext = '';
         /** @var ApplicationContext $context */
-        $context = GeneralUtility::getApplicationContext();
+        $context = Environment::getContext();
 
         if (isset($context) && ($context->__toString() === 'Production/Staging' || $context->__toString() === 'Development/Staging')) {
             $strContext = 'staging';
@@ -36,7 +37,7 @@ class ContextHelper
             $strContext = 'development';
         } elseif ($context->isTesting()) {
             $strContext = 'testing';
-        } elseif ($context->isProduction() && TYPO3_MODE === 'BE') {
+        } elseif (TYPO3_MODE === 'BE' && $context->isProduction()) {
             $strContext = 'production';
         }
 
@@ -46,10 +47,10 @@ class ContextHelper
     /**
      * Add CSS and JS files
      */
-    public static function addCssJsFiles()
+    public static function addCssJsFiles(): void
     {
         /** @var PageRenderer $pageRenderer */
-        $pageRenderer = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Page\\PageRenderer');
+        $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
 
         $pageRenderer->addCssFile(
             PathUtility::getAbsoluteWebPath(

@@ -26,3 +26,9 @@ You can switch off/on the ribbon in the frontend/backend by changing the extensi
 ![extension configuration](Documentation/Images/extension_configuration.png)
 
 The ribbon is hidden in frontend in production context automatically!
+
+## Compatibility
+
+Version tagged with 2.1.0 is compatible with TYPO3 6 up to 9
+
+Since version 3.0.0 only TYPO3 10 is supported (PHP >= 7.2)
