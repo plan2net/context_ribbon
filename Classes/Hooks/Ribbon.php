@@ -44,7 +44,7 @@ class Ribbon implements LoggerAwareInterface
         $this->setRibbon('frontend');
     }
 
-    protected function setRibbon($mode): void
+    protected function setRibbon(string $mode): void
     {
         if ($this->enabledFor($mode) && null !== ($contextName = $this->getContextName())) {
             $this->addMetaTag($contextName);
