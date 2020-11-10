@@ -8,7 +8,6 @@ use Exception;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
-use TYPO3\CMS\Core\Core\ApplicationContext;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -37,24 +36,18 @@ class Ribbon implements LoggerAwareInterface
 
     public function setRibbonForBackend(): void
     {
-        $this->processExtensionConfiguration('enableBackend');
+        $this->setRibbon('backend');
     }
 
     public function setRibbonForFrontend(): void
     {
-        $this->processExtensionConfiguration('enableFrontend');
+        $this->setRibbon('frontend');
     }
 
-    protected function processExtensionConfiguration(string $path): void
+    protected function setRibbon($mode): void
     {
-        try {
-            $configurationEntry = (bool)GeneralUtility::makeInstance(ExtensionConfiguration::class)
-                ->get('context_ribbon', $path);
-        } catch (Exception $e) {
-            $this->logger->error($e->getMessage());
-        }
-        if ($configurationEntry) {
-            $this->addMetaTag();
+        if ($this->enabledFor($mode) && null !== ($contextName = $this->getContextName())) {
+            $this->addMetaTag($contextName);
             $this->addCssJsFiles();
         }
     }
@@ -63,28 +56,11 @@ class Ribbon implements LoggerAwareInterface
      * Provide HTML with an information about TYPO3_CONTEXT:
      * add a meta tag to the header data.
      */
-    protected function addMetaTag(): void
+    protected function addMetaTag(string $contextName): void
     {
-        $strContext = '';
-        /** @var ApplicationContext $context */
-        $context = Environment::getContext();
-
-        if (isset($context) && ($context->__toString() === 'Production/Staging' || $context->__toString() === 'Development/Staging')) {
-            $strContext = 'staging';
-        } elseif ($context->isDevelopment()) {
-            $strContext = 'development';
-        } elseif ($context->isTesting()) {
-            $strContext = 'testing';
-        } elseif (TYPO3_MODE === 'BE' && $context->isProduction()) {
-            $strContext = 'production';
-        }
-
-        $this->pageRenderer->addHeaderData('<meta name="context" content="' . $strContext . '" />');
+        $this->pageRenderer->addHeaderData('<meta name="context" content="' . $contextName . '" />');
     }
 
-    /**
-     * Add CSS and JS files
-     */
     protected function addCssJsFiles(): void
     {
         $this->pageRenderer->addCssFile(
@@ -102,5 +78,36 @@ class Ribbon implements LoggerAwareInterface
                 )
             )
         );
+    }
+
+    protected function enabledFor(string $mode): bool
+    {
+        $enabled = false;
+        try {
+            $enabled = (bool)GeneralUtility::makeInstance(ExtensionConfiguration::class)
+                ->get('context_ribbon', 'enable' . ucfirst($mode));
+        } catch (Exception $e) {
+            $this->logger->error($e->getMessage());
+        }
+
+        return $enabled;
+    }
+
+    protected function getContextName(): ?string
+    {
+        $contextName = null;
+        $context = Environment::getContext();
+
+        if ((string)$context === 'Production/Staging' || (string)$context === 'Development/Staging') {
+            $contextName = 'staging';
+        } elseif ($context->isDevelopment()) {
+            $contextName = 'development';
+        } elseif ($context->isTesting()) {
+            $contextName = 'testing';
+        } elseif (TYPO3_MODE === 'BE' && $context->isProduction()) {
+            $contextName = 'production';
+        }
+
+        return $contextName;
     }
 }
