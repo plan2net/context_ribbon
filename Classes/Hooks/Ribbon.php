@@ -1,12 +1,12 @@
 <?php
+
 declare(strict_types=1);
 
 namespace WapplerSystems\ContextRibbon\Hooks;
 
+use Exception;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
-use TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationExtensionNotConfiguredException;
-use TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationPathDoesNotExistException;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Core\ApplicationContext;
 use TYPO3\CMS\Core\Core\Environment;
@@ -48,12 +48,10 @@ class Ribbon implements LoggerAwareInterface
     protected function processExtensionConfiguration(string $path): void
     {
         try {
-            $configurationEntry = (bool)GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('context_ribbon',
-                $path);
-        } catch (ExtensionConfigurationExtensionNotConfiguredException $extensionConfigurationExtensionNotConfiguredException) {
-            $this->logger->error($extensionConfigurationExtensionNotConfiguredException->getMessage());
-        } catch (ExtensionConfigurationPathDoesNotExistException $extensionConfigurationPathDoesNotExistException) {
-            $this->logger->error($extensionConfigurationPathDoesNotExistException->getMessage());
+            $configurationEntry = (bool)GeneralUtility::makeInstance(ExtensionConfiguration::class)
+                ->get('context_ribbon', $path);
+        } catch (Exception $e) {
+            $this->logger->error($e->getMessage());
         }
         if ($configurationEntry) {
             $this->addMetaTag();
@@ -105,5 +103,4 @@ class Ribbon implements LoggerAwareInterface
             )
         );
     }
-
 }
