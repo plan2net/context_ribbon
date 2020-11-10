@@ -8,7 +8,6 @@
   "keywords": [
     "TYPO3 CMS"
   ],
-  "version": "3.0.0",
   "require": {
     "typo3/cms-core": "^10.4"
   },
