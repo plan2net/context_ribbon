@@ -9,11 +9,16 @@
     "TYPO3 CMS"
   ],
   "require": {
-    "typo3/cms-core": "^10.4"
+    "typo3/cms-core": "^10.4 || ^11.5"
   },
   "autoload": {
     "psr-4": {
       "WapplerSystems\\ContextRibbon\\": "Classes"
+    }
+  },
+  "extra": {
+    "typo3/cms" : {
+      "extension-key" : "context_ribbon"
     }
   }
 }
