@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace WapplerSystems\ContextRibbon\Hooks;
 
-use Exception;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Core\Environment;
+use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
@@ -16,7 +16,6 @@ use TYPO3\CMS\Core\Utility\PathUtility;
 /**
  * Class Ribbon
  *
- * @package WapplerSystems\ContextRibbon\Hooks
  * @author Sven Wappler
  * @author Ioulia Kondratovitch <ik@plan2.net>
  */
@@ -24,10 +23,7 @@ class Ribbon implements LoggerAwareInterface
 {
     use LoggerAwareTrait;
 
-    /**
-     * @var PageRenderer
-     */
-    protected $pageRenderer;
+    protected PageRenderer $pageRenderer;
 
     public function __construct()
     {
@@ -46,7 +42,9 @@ class Ribbon implements LoggerAwareInterface
 
     protected function setRibbon(string $mode): void
     {
-        if ($this->enabledFor($mode) && null !== ($contextName = $this->getContextName())) {
+        $contextName = $this->getContextName();
+
+        if ($this->enabledFor($mode) && null !== $contextName) {
             $this->addMetaTag($contextName);
             $this->addCssJsFiles();
         }
@@ -84,9 +82,9 @@ class Ribbon implements LoggerAwareInterface
     {
         $enabled = false;
         try {
-            $enabled = (bool)GeneralUtility::makeInstance(ExtensionConfiguration::class)
+            $enabled = (bool) GeneralUtility::makeInstance(ExtensionConfiguration::class)
                 ->get('context_ribbon', 'enable' . ucfirst($mode));
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             $this->logger->error($e->getMessage());
         }
 
@@ -97,14 +95,15 @@ class Ribbon implements LoggerAwareInterface
     {
         $contextName = null;
         $context = Environment::getContext();
+        $applicationType = ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST']);
 
-        if ((string)$context === 'Production/Staging' || (string)$context === 'Development/Staging') {
+        if ('Production/Staging' === (string) $context || 'Development/Staging' === (string) $context) {
             $contextName = 'staging';
         } elseif ($context->isDevelopment()) {
             $contextName = 'development';
         } elseif ($context->isTesting()) {
             $contextName = 'testing';
-        } elseif (TYPO3_MODE === 'BE' && $context->isProduction()) {
+        } elseif ($applicationType->isBackend() && $context->isProduction()) {
             $contextName = 'production';
         }
 
