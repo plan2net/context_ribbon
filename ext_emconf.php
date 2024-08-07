@@ -8,10 +8,10 @@ $EM_CONF['context_ribbon'] = [
     'category' => 'backend',
     'author_company' => 'WapplerSystems, plan2net',
     'state' => 'stable',
-    'version' => '12.0.0',
+    'version' => '13.0.0',
     'constraints' => [
         'depends' => [
-            'typo3' => '12.4.0-12.4.99',
+            'typo3' => '13.2.0-13.2.99',
         ],
         'conflicts' => [
         ],
