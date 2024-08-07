@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace WapplerSystems\ContextRibbon\Hooks;
+namespace WapplerSystems\ContextRibbon;
 
-use Psr\Log\LoggerAwareInterface;
-use Psr\Log\LoggerAwareTrait;
+use Psr\Log\LoggerInterface;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Http\ApplicationType;
@@ -19,28 +18,15 @@ use TYPO3\CMS\Core\Utility\PathUtility;
  * @author Sven Wappler
  * @author Ioulia Kondratovitch <ik@plan2.net>
  */
-class Ribbon implements LoggerAwareInterface
+class Ribbon
 {
-    use LoggerAwareTrait;
-
-    protected PageRenderer $pageRenderer;
-
-    public function __construct()
-    {
-        $this->pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
+    public function __construct(
+        private readonly LoggerInterface $logger,
+        private readonly PageRenderer $pageRenderer
+    ) {
     }
 
-    public function setRibbonForBackend(): void
-    {
-        $this->setRibbon('backend');
-    }
-
-    public function setRibbonForFrontend(): void
-    {
-        $this->setRibbon('frontend');
-    }
-
-    protected function setRibbon(string $mode): void
+    public function setRibbon(string $mode): void
     {
         $contextName = $this->getContextName();
 
