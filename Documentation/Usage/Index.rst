@@ -16,7 +16,7 @@
 Usage
 -----
 
-Install the extension and set the application context: https://docs.typo3.org/typo3cms/extensions/bsdist/Main/ApplicationContext/Index.html
+Install the extension and set the application context (TYPO3_CONTEXT environment variable).
 
 Restart your webserver server and the ribbon is shown.
 

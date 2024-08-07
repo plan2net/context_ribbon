@@ -29,6 +29,8 @@ The ribbon is hidden in frontend in production context automatically!
 
 ## Compatibility
 
-Version tagged with 2.1.0 is compatible with TYPO3 6 up to 9
+Version tagged with 2.1.0 is compatible with TYPO3 6 up to 9.
 
-Since version 3.0.0 only TYPO3 10 is supported (PHP >= 7.2)
+Version 3.0.0 is only compatible with TYPO3 10 (PHP >= 7.2).
+
+Versions 10.0.0 and higher are compatible with the corresponding TYPO3 versions.

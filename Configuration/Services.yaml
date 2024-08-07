@@ -1,0 +1,12 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  WapplerSystems\ContextRibbon\Ribbon:
+    public: true
+  WapplerSystems\ContextRibbon\RibbonBackend:
+    tags:
+      - name: event.listener
+        identifier: 'context-ribbon/backend/after-backend-page-render'
