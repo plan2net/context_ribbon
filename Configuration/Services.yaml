@@ -10,3 +10,7 @@ services:
     tags:
       - name: event.listener
         identifier: 'context-ribbon/backend/after-backend-page-render'
+  WapplerSystems\ContextRibbon\RibbonFrontend:
+    tags:
+      - name: event.listener
+        identifier: 'context-ribbon/frontend/modify-typo-script-config-event'
