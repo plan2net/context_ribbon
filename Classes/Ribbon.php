@@ -81,7 +81,10 @@ class Ribbon
     {
         $contextName = null;
         $context = Environment::getContext();
-        $applicationType = ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST']);
+        $applicationType = null;
+        if (($GLOBALS['TYPO3_REQUEST'] ?? null) instanceof ServerRequestInterface) {
+            $applicationType = ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST']);
+        }
 
         if ('Production/Staging' === (string) $context || 'Development/Staging' === (string) $context) {
             $contextName = 'staging';
