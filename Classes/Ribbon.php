@@ -92,7 +92,7 @@ class Ribbon
             $contextName = 'development';
         } elseif ($context->isTesting()) {
             $contextName = 'testing';
-        } elseif ($applicationType->isBackend() && $context->isProduction()) {
+        } elseif ((null !== $applicationType && $applicationType->isBackend()) && $context->isProduction()) {
             $contextName = 'production';
         }
 
