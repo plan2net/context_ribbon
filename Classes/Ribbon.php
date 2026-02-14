@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace WapplerSystems\ContextRibbon;
 
+use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Http\ApplicationType;
@@ -12,17 +14,12 @@ use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
 
-/**
- * Class Ribbon
- *
- * @author Sven Wappler
- * @author Ioulia Kondratovitch <ik@plan2.net>
- */
-class Ribbon
+#[Autoconfigure(public: true)]
+readonly class Ribbon
 {
     public function __construct(
-        private readonly LoggerInterface $logger,
-        private readonly PageRenderer $pageRenderer
+        private LoggerInterface $logger,
+        private PageRenderer $pageRenderer
     ) {
     }
 

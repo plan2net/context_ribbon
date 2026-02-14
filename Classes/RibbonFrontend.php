@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace WapplerSystems\ContextRibbon;
 
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Event\ModifyTypoScriptConfigEvent;
+use TYPO3\CMS\Core\Attribute\AsEventListener;
 
+#[AsEventListener(identifier: 'context-ribbon/frontend/modify-typo-script-config-event')]
 class RibbonFrontend
 {
-    protected Ribbon $ribbon;
-
-    public function __construct()
-    {
-        $this->ribbon = GeneralUtility::makeInstance(Ribbon::class);
+    public function __construct(
+        protected Ribbon $ribbon
+    ) {
     }
 
     public function __invoke(ModifyTypoScriptConfigEvent $event): void

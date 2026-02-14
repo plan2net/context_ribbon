@@ -1,15 +1,14 @@
 {
   "name": "wappler-systems/context-ribbon",
-  "type": "typo3-cms-extension",
   "description": "Shows a ribbon in the right top corner of the backend and frontend depending on the TYPO3 application context",
-  "license": [
-    "GPL-2.0-or-later"
-  ],
+  "license": "GPL-2.0-or-later",
+  "type": "typo3-cms-extension",
+  "version": "14.0.0",
   "keywords": [
     "TYPO3 CMS"
   ],
   "require": {
-    "typo3/cms-core": "^13.2"
+    "typo3/cms-core": "^13.4 || ^14"
   },
   "autoload": {
     "psr-4": {
